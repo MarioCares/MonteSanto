@@ -22,9 +22,9 @@
                 </div>
                 <div class="column is-2">
                     <div class="field">
-                        <label for="numero" class="label">Número</label>
+                        <label th:for="numero" class="label">Número</label>
                         <div class="control">
-                            <input type="number" class="input" id="numero" name="numero" th:field="*{numero}" />
+                            <input type="number" class="input" th:id="numero" th:name="numero" th:value="${siguienteNumero}" />
                         </div>
                         <p th:if="${#fields.hasErrors('numero')}" class="help is-danger"
                            th:text="${#strings.listJoin(#fields.errors('numero'), ', ')}"></p>

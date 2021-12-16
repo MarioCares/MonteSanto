@@ -22,7 +22,13 @@ public class CancionController {
     public ModelAndView nueva(){
         ModelAndView respuesta = new ModelAndView("himnario/nueva");
         respuesta.addObject("formData", new CancionFormData());
+        respuesta.addObject("siguienteNumero", cancionService.findLastNumero() + 1);
         return respuesta;
+    }
+
+    @GetMapping(value = "/Cancion/Busqueda")
+    public String busqueda(){
+        return "himnario/busqueda";
     }
 
     @PostMapping(value = "/Cancion/Nueva")
@@ -32,6 +38,13 @@ public class CancionController {
         }
         cancionService.save(formData.toModel());
         return "redirect:/Himnario";
+    }
+
+    @PostMapping(value = "/Cancion/Busqueda")
+    public ModelAndView busqueda(@RequestParam String termino){
+        ModelAndView respuesta = new ModelAndView("himnario/index");
+        respuesta.addObject("canciones", cancionService.findByTextoContaining(termino));
+        return respuesta;
     }
 
     @GetMapping(value = "/Cancion/{id}")

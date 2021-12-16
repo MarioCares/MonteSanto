@@ -23,4 +23,10 @@ public class CancionService {
     public Iterable<CancionModel> findAll(){
         return cancionRepository.findAll();
     }
+
+    public Integer findLastNumero() { return cancionRepository.findMaxNumero(); }
+
+    public Iterable<CancionModel> findByTextoContaining(String termino){
+        return cancionRepository.findByTextoContainingIgnoreCase(termino);
+    }
 }
