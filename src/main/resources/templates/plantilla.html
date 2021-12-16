@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:fragment="header(titulo, links)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:replace="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <th:block th:replace="${links}" />
+</head>
+<body>
+
+<footer class="footer" th:fragment="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>MonteSanto.cl</strong> por <a href="https://mariocares.dev">Mario Cares</a>.<br />
+            El código fuente de la aplicación puedes encontrarlo en XXX y su licencia es
+            <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es" target="_blank">CC0 1.0</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+
+</html>

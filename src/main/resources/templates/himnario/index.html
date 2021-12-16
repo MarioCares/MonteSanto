@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Himnario - MonteSanto.cl</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<section class="section">
+    <div class="container content">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title">Himnario</p>
+                </div>
+            </div>
+            <div class="level-right">
+                <p class="level-item">
+                    <a class="button is-success" th:href="@{/Cancion/Nueva}" target="_self">Nueva Canción</a>
+                </p>
+            </div>
+        </nav>
+        <div class="table-container">
+            <table class="table is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Titulo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cancion : ${canciones}">
+                    <td th:text="${cancion.getNumero()}"></td>
+                    <td>
+                        <a th:href="@{/Cancion/{path}(path=${cancion.getId()})}" target="_self" th:text="${cancion.getTitulo()}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div th:replace="plantilla :: footer"></div>
+</body>
+</html>

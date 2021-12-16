@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Nueva Canción - Himnario - MonteSanto.cl</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<section class="section">
+    <div class="container content">
+        <h1 class="title">Nueva Canción - Himnario</h1>
+        <form th:action="@{/Cancion/Nueva}" th:method="POST" th:object="${formData}">
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="titulo" class="label">Titulo</label>
+                        <div class="control">
+                            <input class="input" id="titulo" name="titulo" th:field="*{titulo}" />
+                        </div>
+                        <p th:if="${#fields.hasErrors('titulo')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('titulo'), ', ')}"></p>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
+                        <label for="numero" class="label">Número</label>
+                        <div class="control">
+                            <input type="number" class="input" id="numero" name="numero" th:field="*{numero}" />
+                        </div>
+                        <p th:if="${#fields.hasErrors('numero')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('numero'), ', ')}"></p>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
+                        <label for="pagina" class="label">Página</label>
+                        <div class="control">
+                            <input type="number" class="input" id="pagina" name="pagina" th:field="*{pagina}" />
+                        </div>
+                        <p th:if="${#fields.hasErrors('pagina')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('pagina'), ', ')}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="texto" class="label">Texto</label>
+                        <div class="control">
+                            <textarea name="texto" id="texto" class="textarea" th:field="*{texto}"></textarea>
+                        </div>
+                        <p th:if="${#fields.hasErrors('texto')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('texto'), ', ')}"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="button is-success" type="submit">Guardar</button>
+        </form>
+    </div>
+</section>
+<div th:replace="plantilla :: footer"></div>
+</body>
+</html>
