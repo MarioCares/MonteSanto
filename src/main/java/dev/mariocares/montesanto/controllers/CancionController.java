@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Controller
@@ -27,8 +28,47 @@ public class CancionController {
     }
 
     @GetMapping(value = "/Cancion/Busqueda")
-    public String busqueda(){
-        return "himnario/busqueda";
+    public ModelAndView busqueda(){
+        ModelAndView respuesta = new ModelAndView("himnario/busqueda");
+        respuesta.addObject("etiquetas", cancionService.findEtiquetas());
+        return respuesta;
+    }
+
+    @GetMapping(value = "/Cancion/{id}")
+    public ModelAndView buscarCancion(@PathVariable Long id){
+        ModelAndView respuesta;
+        Optional<CancionModel> optCancion = cancionService.findById(id);
+        if(optCancion.isPresent()){
+            respuesta = new ModelAndView("himnario/cancion");
+            respuesta.addObject("cancion", optCancion.get());
+            respuesta.addObject("etiquetas",
+                    String.join(",", cancionService.findEtiquetasByCancion(optCancion.get().getId())));
+        } else {
+            respuesta = new ModelAndView("himnario/noEncuentro");
+        }
+        return respuesta;
+    }
+
+    @GetMapping(value = "/Cancion/Editar/{id}")
+    public ModelAndView editarCancion(@PathVariable Long id){
+        ModelAndView respuesta;
+        Optional<CancionModel> optCancion = cancionService.findById(id);
+        if(optCancion.isPresent()){
+            respuesta = new ModelAndView("himnario/cancionEditar");
+            respuesta.addObject("formData",
+                    new CancionFormData(optCancion.get().getNumero(),
+                            optCancion.get().getPagina(),
+                            optCancion.get().getTitulo(),
+                            optCancion.get().getTexto()
+                    )
+            );
+            respuesta.addObject("id", optCancion.get().getId());
+            respuesta.addObject("etiquetas",
+                String.join(",", cancionService.findEtiquetasByCancion(optCancion.get().getId())));
+        } else {
+            respuesta = new ModelAndView("himnario/noEncuentro");
+        }
+        return respuesta;
     }
 
     @PostMapping(value = "/Cancion/Nueva")
@@ -41,29 +81,42 @@ public class CancionController {
     }
 
     @PostMapping(value = "/Cancion/Busqueda")
-    public ModelAndView busqueda(@RequestParam String termino){
+    public ModelAndView busqueda(@RequestParam String termino, @RequestParam String etiqueta){
         ModelAndView respuesta = new ModelAndView("himnario/index");
-        respuesta.addObject("canciones", cancionService.findByTextoContaining(termino));
+        if(!etiqueta.isBlank()){
+            respuesta.addObject("canciones", cancionService.findByEtiqueta(etiqueta));
+        } else {
+            respuesta.addObject("canciones", cancionService.findByTextoContaining(termino));
+        }
         return respuesta;
     }
 
-    @GetMapping(value = "/Cancion/{id}")
-    public ModelAndView buscarCancion(@PathVariable Long id){
-        ModelAndView respuesta;
-        Optional<CancionModel> optCancion = cancionService.findById(id);
-        if(optCancion.isPresent()){
-            respuesta = new ModelAndView("himnario/cancion");
-            respuesta.addObject("cancion", optCancion.get());
-        } else {
-            respuesta = new ModelAndView("himnario/noEncuentro");
+    @PostMapping(value = "/Cancion/{id}")
+    public String editarCancion(@Valid @ModelAttribute("formData") CancionFormData formData,
+                                @PathVariable Long id, BindingResult binding, Model model){
+        if(binding.hasErrors()){
+            return "redirect:/Cancion/" + id;
         }
-        return respuesta;
+        CancionModel cancionModel = formData.toModel();
+        cancionModel.setId(id);
+        cancionService.save(cancionModel);
+        return "redirect:/Cancion/" + id;
+    }
+
+    @PostMapping(value = "/Cancion/Etiquetas/{id}")
+    public String editarEtiquetas(@RequestParam String etiquetas, @PathVariable Long id){
+        cancionService.eliminarEtiquetas(id);
+        Arrays.stream(etiquetas.split(",")).forEach(etiqueta -> {
+            cancionService.asociarEtiqueta(etiqueta, id);
+        });
+        return "redirect:/Cancion/" + id;
     }
 
     @GetMapping(value = "/Himnario")
     public ModelAndView todas(){
         ModelAndView respuesta = new ModelAndView("himnario/index");
-        respuesta.addObject("canciones", cancionService.findAll());
+        respuesta.addObject("canciones", cancionService.findAllByOrderByNumeroAsc());
         return respuesta;
     }
+
 }

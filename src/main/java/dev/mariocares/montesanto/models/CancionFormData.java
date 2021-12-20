@@ -19,6 +19,16 @@ public class CancionFormData {
     @Size(min = 50, message = "La canción debe tener al menos 50 caracteres")
     private String texto;
 
+    public CancionFormData() {
+    }
+
+    public CancionFormData(Integer numero, Integer pagina, String titulo, String texto) {
+        this.numero = numero;
+        this.pagina = pagina;
+        this.titulo = titulo;
+        this.texto = texto;
+    }
+
     public Integer getNumero() {
         return numero;
     }

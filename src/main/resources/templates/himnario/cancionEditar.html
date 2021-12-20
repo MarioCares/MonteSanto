@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="plantilla :: header(~{::title}, ~{::link})">
-    <title>Nueva Canción - Himnario - MonteSanto.cl</title>
-    <link rel="stylesheet" href="">
+    <title th:text="'Editar: ' + ${formData.getTitulo()} + ' - MonteSanto.cl'"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tagsinput@1.0.3/dist/css/bulma-tagsinput.min.css" />
 </head>
 <body>
 <section class="section">
     <div class="container content">
-        <h1 class="title">Nueva Canción - Himnario</h1>
-        <form th:action="@{/Cancion/Nueva}" th:method="POST" th:object="${formData}">
+        <h1 class="title" th:text="'Editar: ' + ${formData.getTitulo()}"></h1>
+        <form th:action="@{|/Cancion/${id}|}" th:method="PUT" th:object="${formData}">
+            <input type="hidden" class="input" th:value="${id}" name="id" />
             <div class="columns">
                 <div class="column">
                     <div class="field">
@@ -24,7 +25,7 @@
                     <div class="field">
                         <label th:for="numero" class="label">Número</label>
                         <div class="control">
-                            <input type="number" class="input" th:id="numero" th:name="numero" th:value="${siguienteNumero}" />
+                            <input type="number" class="input" th:id="numero" th:name="numero" th:value="${formData.getNumero()}" />
                         </div>
                         <p th:if="${#fields.hasErrors('numero')}" class="help is-danger"
                            th:text="${#strings.listJoin(#fields.errors('numero'), ', ')}"></p>
@@ -53,12 +54,31 @@
                     </div>
                 </div>
             </div>
-            <button class="button is-success" type="submit">Guardar</button>
+            <button class="button is-success" type="submit">Actualizar</button>
+        </form>
+        <h1 class="title is-5">Etiquetas (terminar con ,)</h1>
+        <form th:method="PUT" th:action="@{|/Cancion/Etiquetas/${id}|}">
+            <div class="columns">
+                <div class="column">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input class="input" type="tags" th:value="${etiquetas}" placeholder="Escribir etiquetas"
+                                   name="etiquetas" />
+                        </div>
+                        <div class="control">
+                            <a class="button is-info">
+                                <button class="button is-info" type="submit">Agregar</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </section>
 <div th:replace="plantilla :: footer(~{::script})">
-    <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tagsinput@1.0.3/dist/js/bulma-tagsinput.min.js"></script>
+    <script type="text/javascript">document.addEventListener('DOMContentLoaded', () => { let tagsinput = BulmaTagsInput.attach('[type="tags"]'); }); </script>
 </div>
 </body>
 </html>

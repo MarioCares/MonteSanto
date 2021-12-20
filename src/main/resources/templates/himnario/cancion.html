@@ -14,15 +14,20 @@
                 </div>
             </div>
             <div class="level-right">
-                <p class="level-item">
+                <div class="level-item">
+                    <a class="button is-primary" th:href="@{|/Cancion/Editar/${cancion.getId()}|}" target="_self">Editar</a>
+                </div>
+                <div class="level-item">
                     <a class="button is-info" th:href="@{/Himnario}" target="_self">Volver</a>
-                </p>
+                </div>
             </div>
         </nav>
         <h1 class="title" ></h1>
         <div th:utext="${cancion.getTextoSaltos()}"></div>
     </div>
 </section>
-<div th:replace="plantilla :: footer"></div>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
 </body>
 </html>

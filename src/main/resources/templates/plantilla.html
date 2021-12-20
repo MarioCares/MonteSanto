@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<footer class="footer" th:fragment="footer">
+<footer class="footer" th:fragment="footer(js)">
     <div class="content has-text-centered">
         <p>
             <strong>MonteSanto.cl</strong> por <a href="https://mariocares.dev">Mario Cares</a>.<br />
@@ -23,8 +23,8 @@
             <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es" target="_blank">CC0 1.0</a>
         </p>
     </div>
+    <th:block th:replace="${js}" />
 </footer>
-
 </body>
 
 </html>

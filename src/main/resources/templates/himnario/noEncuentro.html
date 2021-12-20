@@ -10,6 +10,8 @@
             <h1 class="title">No encuentro la canción ...</h1>
         </div>
     </section>
-    <div th:replace="plantilla :: footer"></div>
+    <div th:replace="plantilla :: footer(~{::script})">
+        <script></script>
+    </div>
 </body>
 </html>

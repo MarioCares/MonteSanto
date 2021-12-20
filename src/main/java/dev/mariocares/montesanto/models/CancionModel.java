@@ -2,6 +2,7 @@ package dev.mariocares.montesanto.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(schema = "montesanto", name = "cancion")
@@ -22,6 +23,9 @@ public class CancionModel implements Serializable {
 
     @Column(name = "pagina", nullable = false)
     private Integer pagina;
+
+    @Transient
+    private List<String> etiquetas;
 
     public CancionModel(){}
 
@@ -74,5 +78,13 @@ public class CancionModel implements Serializable {
 
     public void setPagina(Integer pagina) {
         this.pagina = pagina;
+    }
+
+    public List<String> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(List<String> etiquetas) {
+        this.etiquetas = etiquetas;
     }
 }

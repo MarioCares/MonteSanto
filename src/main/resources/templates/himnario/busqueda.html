@@ -8,13 +8,35 @@
 <section class="section">
     <div class="container content">
         <form method="post" th:action="@{/Cancion/Busqueda}">
-            <div class="field">
-                <label for="termino" class="label">Término</label>
-                <div class="control">
-                    <input class="input" name="termino" id="termino" />
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="termino" class="label">Término</label>
+                        <div class="control">
+                            <input class="input" name="termino" id="termino" />
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label for="etiqueta" class="label">Etiqueta</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="etiqueta" id="etiqueta">
+                                    <option value="">--</option>
+                                    <option th:each="etiqueta : ${etiquetas}" th:text="${etiqueta}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-1">
+                    <label class="label">&nbsp;</label>
+                    <div class="control">
+                        <button class="button is-success" type="submit">Buscar</button>
+                    </div>
                 </div>
             </div>
-            <button class="button is-success" type="submit">Buscar</button>
         </form>
         <div class="table-container">
             <table class="table is-fullwidth">
@@ -31,6 +53,8 @@
         </div>
     </div>
 </section>
-<div th:replace="plantilla :: footer"></div>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
 </body>
 </html>
