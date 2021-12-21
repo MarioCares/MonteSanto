@@ -21,7 +21,7 @@ html,body {
     border-left: none;
     border-right: none;
 }
-.card-image > .fa, .fas {
+.card-image > .fa, .fas, .far {
     font-size: 8rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -71,4 +71,8 @@ footer li:before {
     float: left;
     margin-left: -1.5em;
     color: #147efb;
+}
+
+.card {
+    height: 100%;
 }
