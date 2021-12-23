@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title th:text="${Articulo.getTitulo()} + ' - MonteSanto.cl'"></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<section class="section">
+    <div class="container content">
+        <h1 class="title" th:text="${Articulo.getTitulo()}"></h1>
+        <div th:utext="${Articulo.getTextoSaltos()}"></div>
+        <a th:href="@{/Articulos}" class="button is-primary">Ir a Inicio</a>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
+</body>
+</html>

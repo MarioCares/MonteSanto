@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Listado Artículos - MonteSanto.cl'</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<section class="section">
+    <div class="container content">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title">Últimos 30 Artículos Publicados</p>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <a class="button is-info" th:href="@{/Articulo/Busqueda}" target="_self">Buscar</a>
+                </div>
+                <div class="level-item">
+                    <a class="button is-success" th:href="@{/Articulo/Nuevo}" target="_self">Nuevo Artículo</a>
+                </div>
+            </div>
+        </nav>
+        <article class="media" th:each="articulo : ${Articulos}">
+            <figure class="media-left">
+                <p class="image is-64x64">
+                    <img th:src="'/img/persona/' + ${articulo.getPublicador(articulo.getPublicador()).getAvatar()}">
+                </p>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong th:text="${articulo.getTitulo()}"></strong> &nbsp;
+                        <small th:text="${articulo.getPublicador(articulo.getPublicador()).getNombre()}"></small> &nbsp;
+                        <span class="tag is-info" th:text="${articulo.getTipo(articulo.getTipo())}"></span> &nbsp;
+                        <span class="tag is-info" th:text="${articulo.getArticuloAt()}"></span>
+                        <br>
+                        [[${articulo.getTexto().substring(0, 100)}]]...
+                        <br />
+                        <a th:href="@{/Articulo/{path}(path=${articulo.getId()})}">Seguir Leyendo...</a>
+                    </p>
+                </div>
+            </div>
+            <div class="media-right"></div>
+        </article>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
+</body>
+</html>

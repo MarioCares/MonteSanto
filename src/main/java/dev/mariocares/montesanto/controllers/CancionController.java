@@ -66,7 +66,7 @@ public class CancionController {
             respuesta.addObject("etiquetas",
                 String.join(",", cancionService.findEtiquetasByCancion(optCancion.get().getId())));
         } else {
-            respuesta = new ModelAndView("himnario/noEncuentro");
+            respuesta = new ModelAndView("noEncuentro");
         }
         return respuesta;
     }

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Nuevo Artículo - MonteSanto.cl'</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tagsinput@1.0.3/dist/css/bulma-tagsinput.min.css" />
+</head>
+<body>
+<section class="section">
+    <div class="container content">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title">Nuevo Artículo</p>
+                </div>
+            </div>
+            <div class="level-right"></div>
+        </nav>
+        <form th:action="@{/Articulo/Nuevo}" th:method="POST" th:object="${formData}">
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="tipo" class="label">Tipo</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="tipo" id="tipo" th:field="*{tipo}">
+                                    <option th:each="tipo : ${Tipos}" th:text="${tipo.descripcion()}" th:value="${tipo.id()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label for="titulo" class="label">Titulo</label>
+                        <div class="control">
+                            <input class="input" id="titulo" name="titulo" th:field="*{titulo}" />
+                        </div>
+                        <p th:if="${#fields.hasErrors('titulo')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('titulo'), ', ')}">
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label for="articuloAt" class="label">Fecha Publicación</label>
+                        <div class="control">
+                            <input class="input" type="date" id="articuloAt" name="articuloAt" th:field="*{articuloAt}" />
+                        </div>
+                        <p th:if="${#fields.hasErrors('articuloAt')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('titulo'), ', ')}">
+                        </p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label for="publicador" class="label">Publicador</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="publicador" id="publicador" th:field="*{publicador}">
+                                    <option th:each="publicador : ${Publicadores}" th:value="${publicador.name()}"
+                                            th:text="${publicador.getNombre()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="texto" class="label">Texto</label>
+                        <div class="control">
+                            <textarea name="texto" rows="30" id="texto" class="textarea" th:field="*{texto}"></textarea>
+                        </div>
+                        <p th:if="${#fields.hasErrors('texto')}" class="help is-danger"
+                           th:text="${#strings.listJoin(#fields.errors('texto'), ', ')}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label for="etiquetas" class="label">Etiquetas (terminar con ,)</label>
+                        <div class="control">
+                            <input class="input" type="tags" th:value="${Etiquetas}" placeholder="Escribir etiquetas"
+                                   name="etiquetas" id="etiquetas" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-success">Guardar</button>
+        </form>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script src="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tagsinput@1.0.3/dist/js/bulma-tagsinput.min.js"></script>
+    <script type="text/javascript">document.addEventListener('DOMContentLoaded', () => { let tagsinput = BulmaTagsInput.attach('[type="tags"]'); }); </script>
+</div>
+</body>
+</html>
