@@ -63,6 +63,10 @@ public class ArticuloModel {
         return texto;
     }
 
+    public String getTexto(Integer largo){
+        return texto.substring(0, Math.min(100, texto.length()));
+    }
+
     public String getTextoSaltos() {
         return texto.replace("\n", "<br />");
     }

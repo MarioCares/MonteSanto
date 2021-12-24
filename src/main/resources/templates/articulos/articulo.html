@@ -7,9 +7,19 @@
 <body>
 <section class="section">
     <div class="container content">
-        <h1 class="title" th:text="${Articulo.getTitulo()}"></h1>
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title" th:text="${Articulo.getTitulo()}"></p>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <a th:href="@{/Articulos}" class="button is-primary">Ir a Inicio</a>
+                </div>
+            </div>
+        </nav>
         <div th:utext="${Articulo.getTextoSaltos()}"></div>
-        <a th:href="@{/Articulos}" class="button is-primary">Ir a Inicio</a>
     </div>
 </section>
 <div th:replace="plantilla :: footer(~{::script})">

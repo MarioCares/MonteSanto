@@ -67,6 +67,6 @@ public class ArticuloController {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
-        return "articulos/index";
+        return "redirect:/Articulos";
     }
 }

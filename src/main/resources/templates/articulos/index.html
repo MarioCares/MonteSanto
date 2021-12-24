@@ -30,16 +30,16 @@
             </figure>
             <div class="media-content">
                 <div class="content">
-                    <p>
+                    <div>
                         <strong th:text="${articulo.getTitulo()}"></strong> &nbsp;
                         <small th:text="${articulo.getPublicador(articulo.getPublicador()).getNombre()}"></small> &nbsp;
                         <span class="tag is-info" th:text="${articulo.getTipo(articulo.getTipo())}"></span> &nbsp;
                         <span class="tag is-info" th:text="${articulo.getArticuloAt()}"></span>
                         <br>
-                        [[${articulo.getTexto().substring(0, 100)}]]...
+                        <div th:utext="${articulo.getTexto(100)}"></div>
                         <br />
                         <a th:href="@{/Articulo/{path}(path=${articulo.getId()})}">Seguir Leyendo...</a>
-                    </p>
+                    </div>
                 </div>
             </div>
             <div class="media-right"></div>
