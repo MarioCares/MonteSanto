@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
 <head th:replace="plantilla :: header(~{::title}, ~{::link})">
-    <title th:text="${cancion.getTitulo()} + ' - MonteSanto.cl'"></title>
+    <title th:text="${Libro.getNombre()} + ' Cap. ' + ${Numero} + ' - MonteSanto.cl'"></title>
     <link rel="stylesheet" href="">
 </head>
 <body>
@@ -11,20 +11,23 @@
         <nav class="level">
             <div class="level-left">
                 <div class="level-item">
-                    <p class="title" th:text="${cancion.getTitulo()}"></p>
+                    <p class="title" th:text="'Libro de ' + ${Libro.getNombre()} + ' Cap. ' + ${Numero}"></p>
                 </div>
             </div>
             <div class="level-right">
                 <div class="level-item">
-                    <a class="button is-primary" th:href="@{|/Cancion/Editar/${cancion.getId()}|}" target="_self">Editar</a>
-                </div>
-                <div class="level-item">
-                    <a class="button is-info" th:href="@{/Himnario}" target="_self">Volver</a>
+                    <a class="button is-info" th:href="@{/Libro/{id}/Capitulos(id=${Libro.getId()})}" target="_self">Volver a Libro</a>
                 </div>
             </div>
         </nav>
-        <h1 class="title" ></h1>
-        <div th:utext="${cancion.getTextoSaltos()}"></div>
+        <div class="table-container">
+            <table class="table">
+                <tr th:each="versiculo : ${Capitulo}">
+                    <td th:text="${versiculo.getVersiculo()}"></td>
+                    <td th:text="${versiculo.getTexto()}"></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </section>
 <div th:replace="plantilla :: footer(~{::script})">

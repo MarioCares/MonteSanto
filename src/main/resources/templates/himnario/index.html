@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
 <head th:replace="plantilla :: header(~{::title}, ~{::link})">
     <title>Himnario - MonteSanto.cl</title>
     <link rel="stylesheet" href="">
 </head>
 <body>
+<nav th:replace="plantilla :: navbar"></nav>
 <section class="section">
     <div class="container content">
         <nav class="level">

@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
 <head th:replace="plantilla :: header(~{::title}, ~{::link})">
     <title>Inicio - MonteSanto.cl</title>
     <link rel="stylesheet" th:href="@{/css/hero.css}">
 </head>
 <body>
+<nav th:replace="plantilla :: navbar"></nav>
 <section class="section">
     <div class="container content">
         <h1 class="title">Inicio</h1>
@@ -53,17 +54,19 @@
                 </a>
             </div>
             <div class="column is-3">
-                <div class="card is-shady">
-                    <div class="card-image has-text-centered">
-                        <i class="fas fa-bible"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="content">
-                            <h4>Biblia Online</h4>
-                            <p></p>
+                <a th:href="@{/Biblia}">
+                    <div class="card is-shady">
+                        <div class="card-image has-text-centered">
+                            <i class="fas fa-bible"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4>Biblia Online</h4>
+                                <p></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

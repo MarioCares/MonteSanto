@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title th:text="${LibroModel.getNombre()} + ' - MonteSanto.cl'"></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<nav th:replace="plantilla :: navbar"></nav>
+<section class="section">
+    <div class="container content">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title" th:text="'Libro de ' + ${LibroModel.getNombre()}"></p>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <a class="button is-info" th:href="@{/Biblia}" target="_self">Volver a Biblia</a>
+                </div>
+            </div>
+        </nav>
+        <div class="box" th:each="capitulo : ${Libro}">
+            <h1 class="title is-4" th:text="'Capitulo ' + ${capitulo.getKey()}"></h1>
+            <div class="table-container">
+                <table class="table">
+                    <tr th:each="versiculo : ${capitulo.getValue()}">
+                        <td th:text="${versiculo.getVersiculo()}"></td>
+                        <td th:text="${versiculo.getTexto()}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
+</body>
+</html>

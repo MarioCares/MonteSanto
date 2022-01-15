@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Biblia Online - MonteSanto.cl'</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<nav th:replace="plantilla :: navbar"></nav>
+<section class="section">
+    <div class="container content">
+        <h1 class="title is-2">Biblia Online</h1>
+        <div class="table-container">
+            <table class="table is-bordered is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Libro</th>
+                    <th>Abreviaturas</th>
+                    <th>Capítulos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="libro : ${Libros}">
+                    <td>
+                        <div class="buttons">
+                            <button class="button" th:text="${libro.getNombre()}"></button>
+                            <a th:href="@{/Libro/{libro}(libro=${libro.getId()})}" class="button is-primary is-small">
+                                Completo
+                            </a>
+                            <a th:href="@{/Libro/{libro}/Capitulos(libro=${libro.getId()})}" class="button is-info is-small">
+                                Capítulos
+                            </a>
+                        </div>
+
+                    </td>
+                    <td th:text="${libro.getAbreviaturas(true)}"></td>
+                    <td th:text="${libro.getCapitulo()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script></script>
+</div>
+</body>
+</html>

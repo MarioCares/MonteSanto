@@ -1,33 +1,21 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
 <head th:replace="plantilla :: header(~{::title}, ~{::link})">
-    <title>Búsqueda Himnario - MonteSanto.cl</title>
-    <link rel="stylesheet" href="">
+    <title>Inicio - MonteSanto.cl</title>
+    <link rel="stylesheet" th:href="@{/css/hero.css}">
 </head>
 <body>
 <nav th:replace="plantilla :: navbar"></nav>
 <section class="section">
     <div class="container content">
-        <form method="post" th:action="@{/Cancion/Busqueda}">
+        <h1 class="title is-2">Búsqueda en Biblia</h1>
+        <form method="post" th:action="@{/Biblia/Busqueda}">
             <div class="columns">
                 <div class="column">
                     <div class="field">
                         <label for="termino" class="label">Término</label>
                         <div class="control">
                             <input class="input" name="termino" id="termino" />
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label for="etiqueta" class="label">Etiqueta</label>
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="etiqueta" id="etiqueta">
-                                    <option value="">--</option>
-                                    <option th:each="etiqueta : ${etiquetas}" th:text="${etiqueta}"></option>
-                                </select>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,16 +27,29 @@
                 </div>
             </div>
         </form>
-        <div class="table-container">
-            <table class="table is-fullwidth">
+        <div class="div-container">
+            <table class="table is-fullwidth is-narrow">
                 <thead>
                 <tr>
-                    <th>Nº</th>
-                    <th>Titulo</th>
+                    <th>Libro</th>
+                    <th>Capítulo</th>
+                    <th>Versículo</th>
+                    <th>Texto</th>
                 </tr>
                 </thead>
                 <tbody>
-
+                <tr th:each="versiculo : ${Versiculos}">
+                    <td>
+                        <a th:href="@{/Libro/{id}(id=${versiculo.getLibro()})}" target="_self"
+                           th:text="${versiculo.libroModel.getNombre()}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/Libro/{id}/Capitulo/{capitulo}(id=${versiculo.getLibro()},capitulo=${versiculo.getCapitulo()})}"
+                           th:text="${versiculo.getCapitulo()}"></a>
+                    </td>
+                    <td th:text="${versiculo.getVersiculo()}"></td>
+                    <td th:text="${versiculo.getTexto()}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>

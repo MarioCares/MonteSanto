@@ -11,8 +11,60 @@
     <th:block th:replace="${links}" />
 </head>
 <body>
+<nav th:fragment="navbar" class="navbar is-transparent is-fixed-top">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        </a>
+        <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 
-<footer class="footer" th:fragment="footer(js)">
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" th:href="@{/}">
+                Inicio
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" th:href="@{/Himnario}">
+                    Himnario
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" th:href="@{/Cancion/Busqueda}">
+                        Búsqueda
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" th:href="@{/Articulos}">
+                    Devocionales y Estudios
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" th:href="@{/Articulo/Busqueda}">
+                        Búsqueda
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" th:href="@{/Biblia}">
+                    Biblia
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" th:href="@{/Biblia/Busqueda}">
+                        Búsqueda
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+</nav>
+
+<footer class="footer" th:fragment="footer(js)" style="padding-bottom: 3rem">
     <div class="content has-text-centered">
         <p>
             <strong>MonteSanto.cl</strong> por <a href="https://mariocares.dev">Mario Cares</a>.<br />
