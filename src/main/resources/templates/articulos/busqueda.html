@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" class="has-navbar-fixed-top">
+<head th:replace="plantilla :: header(~{::title}, ~{::link})">
+    <title>Búsqueda de Artículos - MonteSanto.cl</title>
+    <link rel="stylesheet" th:href="@{/css/hero.css}">
+</head>
+<body>
+<nav th:replace="plantilla :: navbar"></nav>
+<section class="section">
+    <div class="container content">
+        <h1 class="title is-2">Búsqueda en Artículos</h1>
+
+    </div>
+</section>
+<div th:replace="plantilla :: footer(~{::script})">
+    <script type="text/javascript" th:src="@{/js/app.js}"></script>
+</div>
+</body>
+</html>

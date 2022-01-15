@@ -80,6 +80,7 @@
 <div th:replace="plantilla :: footer(~{::script})">
     <script src="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tagsinput@1.0.3/dist/js/bulma-tagsinput.min.js"></script>
     <script type="text/javascript">document.addEventListener('DOMContentLoaded', () => { let tagsinput = BulmaTagsInput.attach('[type="tags"]'); }); </script>
+    <script type="text/javascript" th:src="@{/js/app.js}"></script>
 </div>
 </body>
 </html>
