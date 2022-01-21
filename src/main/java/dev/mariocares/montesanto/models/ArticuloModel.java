@@ -16,6 +16,9 @@ public class ArticuloModel {
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
+    @Column(name = "introduccion")
+    private String introduccion;
+
     @Column(name = "texto", nullable = false)
     private String texto;
 
@@ -35,8 +38,9 @@ public class ArticuloModel {
     public ArticuloModel() {
     }
 
-    public ArticuloModel(String titulo, String texto, Date articuloAt, Integer tipo, String publicador) {
+    public ArticuloModel(String titulo, String introduccion, String texto, Date articuloAt, Integer tipo, String publicador) {
         this.titulo = titulo;
+        this.introduccion = introduccion;
         this.texto = texto;
         this.articuloAt = articuloAt;
         this.tipo = tipo;
@@ -87,10 +91,10 @@ public class ArticuloModel {
         return tipo;
     }
 
-    public String getTipo(Integer id) {
+    public String getTipoTag(Integer id) {
         return Arrays.stream(ArticuloTipo.values()).filter(
                 tipo -> tipo.id().equals(id)
-        ).findFirst().get().descripcion();
+        ).findFirst().get().tag();
     }
 
     public void setTipo(Integer tipo) {
@@ -117,5 +121,17 @@ public class ArticuloModel {
 
     public void setEtiquetas(List<String> etiquetas) {
         this.etiquetas = etiquetas;
+    }
+
+    public String getIntroduccion() {
+        return introduccion;
+    }
+
+    public String getIntroduccionSaltos() {
+        return introduccion.replace("\n", "<br />");
+    }
+
+    public void setIntroduccion(String introduccion) {
+        this.introduccion = introduccion;
     }
 }

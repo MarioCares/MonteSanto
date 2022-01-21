@@ -47,6 +47,11 @@ public class ArticuloController {
         return respuesta;
     }
 
+    @GetMapping(value = "/Articulo/Busqueda")
+    public String busqueda(){
+        return "articulos/busqueda";
+    }
+
     @PostMapping(value = "/Articulo/Nuevo")
     public String nuevo(@Valid @ModelAttribute("formData") ArticuloFormData formData,
                         BindingResult binding,

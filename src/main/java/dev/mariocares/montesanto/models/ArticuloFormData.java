@@ -15,13 +15,14 @@ public class ArticuloFormData {
     private String texto;
 
     private Integer tipo;
-    private String articuloAt, publicador;
+    private String articuloAt, publicador, introduccion;
 
     public ArticuloFormData() {
     }
 
-    public ArticuloFormData(String titulo, String texto, Integer tipo, String publicador, String articuloAt) {
+    public ArticuloFormData(String titulo, String introduccion, String texto, Integer tipo, String publicador, String articuloAt) {
         this.titulo = titulo;
+        this.introduccion = introduccion;
         this.texto = texto;
         this.tipo = tipo;
         this.publicador = publicador;
@@ -34,6 +35,14 @@ public class ArticuloFormData {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getIntroduccion() {
+        return introduccion;
+    }
+
+    public void setIntroduccion(String introduccion) {
+        this.introduccion = introduccion;
     }
 
     public String getTexto() {
@@ -70,11 +79,12 @@ public class ArticuloFormData {
 
     public ArticuloModel toModel() throws ParseException {
         return new ArticuloModel(
-            this.titulo,
-            this.texto,
-            new SimpleDateFormat("yyyy-MM-dd").parse(this.articuloAt),
-            this.tipo,
-            this.publicador
+                this.titulo,
+                this.introduccion,
+                this.texto,
+                new SimpleDateFormat("yyyy-MM-dd").parse(this.articuloAt),
+                this.tipo,
+                this.publicador
         );
     }
 
@@ -82,6 +92,7 @@ public class ArticuloFormData {
     public String toString() {
         return "ArticuloFormData{" +
                 "titulo='" + titulo + '\'' +
+                ", introduccion='" + introduccion + '\'' +
                 ", texto='" + texto + '\'' +
                 ", tipo=" + tipo +
                 ", articuloAt='" + articuloAt + '\'' +

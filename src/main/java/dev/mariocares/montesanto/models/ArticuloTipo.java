@@ -17,6 +17,11 @@ public enum ArticuloTipo {
         return descripcion;
     }
 
+    public String tag(){
+        String tipo = (id == 1) ? "info" : ((id == 2) ? "success" : "warning");
+        return "<span class='tag is-" + tipo + "'>" + descripcion + "</span>";
+    }
+
     public Integer id() {
         return id;
     }

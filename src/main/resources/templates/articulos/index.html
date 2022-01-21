@@ -34,10 +34,11 @@
                     <div>
                         <strong th:text="${articulo.getTitulo()}"></strong> &nbsp;
                         <small th:text="${articulo.getPublicador(articulo.getPublicador()).getNombre()}"></small> &nbsp;
-                        <span class="tag is-info" th:text="${articulo.getTipo(articulo.getTipo())}"></span> &nbsp;
+                        <span th:utext="${articulo.getTipoTag(articulo.getTipo())}"></span> &nbsp;
                         <span class="tag is-info" th:text="${articulo.getArticuloAt()}"></span>
-                        <br>
-                        <div th:utext="${articulo.getTexto(100)}"></div>
+                        <div th:if="${!articulo.getIntroduccion().isEmpty()}">
+                            <blockquote th:utext="${articulo.getIntroduccionSaltos()}"></blockquote>
+                        </div>
                         <br />
                         <a th:href="@{/Articulo/{path}(path=${articulo.getId()})}">Seguir Leyendo...</a>
                     </div>
